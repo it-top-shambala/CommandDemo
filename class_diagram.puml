@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface ICommand {
++ {abstract} Execute() : void
++ {abstract} CanExecute() : bool
+}
+
+ICommand <|.. CreateCommand
+class CreateCommand {
+- context : string
+
++ CreateCommand(context : string)
+
++ Execute() : void
++ CanExecute() : bool
+}
+
+ICommand <|.. DeleteCommand
+class DeleteCommand {
+- context : string
+
++ DeleteCommand(context : string)
+
++ Execute() : void
++ CanExecute() : bool
+}
+
+ICommand <--o Editor
+class Editor {
+- context : string
+- commands : ICommand[]
+
++ Editor()
+
++ AddCommand(name : string, command : ICommand) : void
++ ExecuteCommand(name : string) : void
+
++ GetContext() : string
+}
+
+@enduml
